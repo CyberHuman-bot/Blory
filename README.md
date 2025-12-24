@@ -1,4 +1,4 @@
-# scratch-editor: The Blory Editor Monorepo
+# blory-editor: The Blory Editor Monorepo
 
 If you'd like to use Blory, please visit the [Blory website](https://blory.vercel.app/). You can build your own
 Blory project by pressing "Create" on that website or by visiting <https://blory.vercel.app/projects/editor/>.
