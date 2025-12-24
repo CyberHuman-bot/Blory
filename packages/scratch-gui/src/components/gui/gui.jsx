@@ -9,6 +9,7 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from '@scratch/scratch-vm';
 import Renderer from '@scratch/scratch-render';
+import {Analytics} from '@vercel/analytics/react';
 
 import Blocks from '../../containers/blocks.jsx';
 import CostumeTab from '../../containers/costume-tab.jsx';
@@ -194,30 +195,33 @@ const GUIComponent = props => {
             [styles.bodyWrapperWithoutMenuBar]: menuBarHidden
         });
 
-        return isPlayerOnly ? (
-            <StageWrapper
-                isFullScreen={isFullScreen}
-                isRendererSupported={isRendererSupported}
-                isRtl={isRtl}
-                loading={loading}
-                manuallySaveThumbnails={
-                    manuallySaveThumbnails &&
-                    userOwnsProject
-                }
-                onUpdateProjectThumbnail={onUpdateProjectThumbnail}
-                stageSize={STAGE_SIZE_MODES.large}
-                vm={vm}
-            >
-                {alertsVisible ? (
-                    <Alerts className={styles.alertsContainer} />
-                ) : null}
-            </StageWrapper>
-        ) : (
-            <Box
-                className={styles.pageWrapper}
-                dir={isRtl ? 'rtl' : 'ltr'}
-                {...componentProps}
-            >
+        return (
+            <>
+                <Analytics />
+                {isPlayerOnly ? (
+                    <StageWrapper
+                        isFullScreen={isFullScreen}
+                        isRendererSupported={isRendererSupported}
+                        isRtl={isRtl}
+                        loading={loading}
+                        manuallySaveThumbnails={
+                            manuallySaveThumbnails &&
+                            userOwnsProject
+                        }
+                        onUpdateProjectThumbnail={onUpdateProjectThumbnail}
+                        stageSize={STAGE_SIZE_MODES.large}
+                        vm={vm}
+                    >
+                        {alertsVisible ? (
+                            <Alerts className={styles.alertsContainer} />
+                        ) : null}
+                    </StageWrapper>
+                ) : (
+                    <Box
+                        className={styles.pageWrapper}
+                        dir={isRtl ? 'rtl' : 'ltr'}
+                        {...componentProps}
+                    >
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         isRtl={isRtl}
@@ -482,6 +486,8 @@ const GUIComponent = props => {
                 </Box>
                 <DragLayer />
             </Box>
+        )}
+            </>
         );
     }}</MediaQuery>);
 };
