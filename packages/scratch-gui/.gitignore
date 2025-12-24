@@ -11,7 +11,7 @@ npm-*
 /test-results
 
 # Build
-/build
+# We'll keep the build directory for vercel
 /dist
 /.opt-in
 
